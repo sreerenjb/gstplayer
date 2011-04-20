@@ -118,3 +118,12 @@ gboolean backend_init (int *argc,char **argv[])
   else 
     return FALSE;	
 }
+
+void backend_stop ()
+{
+
+  gst_element_set_state(media->pipeline, GST_STATE_NULL);
+  gst_object_unref(GST_OBJECT (media->pipeline));
+  gst_deinit();
+
+}
