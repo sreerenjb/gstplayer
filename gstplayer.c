@@ -35,8 +35,12 @@ int main(int argc, char *argv[])
     exit (0);
   }
  
-  if (argc > 1)
-    uri = g_strdup_printf ("file://%s", argv[1]);
+  if (argc > 1) {
+    if (g_strrstr (argv[1],"rtsp://") || g_strrstr (argv[1],"http://") || g_strrstr (argv[1],"file://"))
+      uri = g_strdup (argv[1]);
+    else
+      uri = g_strdup_printf ("file://%s", argv[1]);
+  }
   else {
     g_message ("Specify the media file name..<gstplayer filename>");
     return 0;
